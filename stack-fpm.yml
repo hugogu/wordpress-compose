@@ -10,8 +10,9 @@ services:
       WORDPRESS_DB_USER: admin
       WORDPRESS_DB_PASSWORD: admin123
       WORDPRESS_DB_NAME: wordpress
+    # Mount to a host folder in order to leverage existing data backup mechanism of the underlying data disk.
     volumes:
-      - site:/var/www/html
+      - ./html:/var/www/html
 
   apache:
     build: './apache/'
@@ -21,8 +22,9 @@ services:
     restart: always
     ports:
       - 8088:80
+    # Mount to the same host folder so that static requests will be handled by apache itself. 
     volumes:
-      - site:/var/www/html
+      - ./html:/var/www/html
     links:
       - wordpress
       - db
@@ -38,8 +40,4 @@ services:
       MYSQL_PASSWORD: admin123
       MYSQL_ROOT_PASSWORD: 123456
     volumes:
-      - db:/var/lib/mysql
-
-volumes:
-  site:
-  db:
+      - ./mysql:/var/lib/mysql
