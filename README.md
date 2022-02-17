@@ -21,14 +21,17 @@ Hopefully you can gain reasonable good performance even on a host with a lower s
 
 Havig *docker-compose* installed by following an on-line instruction like [this](https://docs.docker.com/compose/install/). 
 
-The `stack-fpm.yml` is usually used when you have a single host with data disk mounted. 
+Customize your options in the [env.template](env.template) file.
 
 ```bash
+source env.template
 cd /mnt              # Or on any data disk. 
 git clone git@github.com:hugogu/wordpress-compose.git blog
 cd blog
 docker-compose -f stack-fpm.yml up --build
 ```
+The `stack-fpm.yml` is usually used when you have a single host with data disk mounted. 
+
 ## How to Backup
 
 Deployment will create `html` and `mysql` as data folder aside of the `stack-fpm.yml` file. 

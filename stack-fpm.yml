@@ -7,27 +7,25 @@ services:
     restart: always
     environment:
       WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: admin
-      WORDPRESS_DB_PASSWORD: admin123
-      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
     # Mount to a host folder in order to leverage existing data backup mechanism of the underlying data disk.
     volumes:
-      - ./html:/var/www/html
+      - ${WORDPRESS_LOCAL_DIR}:/var/www/html
 
   apache:
     build: './apache/'
     depends_on:
       - wordpress
-      - db
     restart: always
     ports:
       - 8088:80
     # Mount to the same host folder so that static requests will be handled by apache itself. 
     volumes:
-      - ./html:/var/www/html
+      - ${WORDPRESS_LOCAL_DIR}:/var/www/html
     links:
       - wordpress
-      - db
 
   db:
     image: mysql:8.0
@@ -35,9 +33,9 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin123
-      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     volumes:
-      - ./mysql:/var/lib/mysql
+      - ${DB_LOCAL_DIR}:/var/lib/mysql
