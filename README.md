@@ -30,6 +30,12 @@ git clone git@github.com:hugogu/wordpress-compose.git blog
 cd blog
 docker-compose -f stack-fpm.yml up --build
 ```
+
+If you just wanna use the env.template directly. Try:
+```bash
+docker-compose --env-file env.template -f stack-fpm.yml up --build
+```
+
 The `stack-fpm.yml` is usually used when you have a single host with data disk mounted. 
 
 ## How to Backup

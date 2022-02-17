@@ -1,2 +1,4 @@
 html/
 mysql/
+tmp/
+.env
