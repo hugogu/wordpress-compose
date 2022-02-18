@@ -8,6 +8,8 @@ WordPress released [a few docker images](https://hub.docker.com/_/wordpress) to 
 
 This tiny project features an all-in-one solution to setup a WordPress site with optimized configuration as default. 
 
+This is usually suitable to setup personal site. 
+
 ## Basic Setup
 
 * [Apache2](https://httpd.apache.org/) from Debian distribution is choiced for its convinient sites and mods management. Please read its [doc](https://salsa.debian.org/apache-team/apache2/-/blob/master/debian/config-dir/apache2.conf.in) for more information
@@ -24,23 +26,21 @@ Havig *docker-compose* installed by following an on-line instruction like [this]
 Customize your options in the [env.template](env.template) file.
 
 ```bash
-set -a; source env.template; set +a
 cd /mnt              # Or on any data disk. 
 git clone git@github.com:hugogu/wordpress-compose.git blog
 cd blog
-docker-compose -f stack-fpm.yml up --build
+set -a; source env.template; set +a
+docker-compose up --build
 ```
 
 If you just wanna use the env.template directly. Try:
 ```bash
-docker-compose --env-file env.template -f stack-fpm.yml up --build
+docker-compose --env-file env.template up --build
 ```
-
-The `stack-fpm.yml` is usually used when you have a single host with data disk mounted. 
 
 ## How to Backup
 
-Deployment will create `html` and `mysql` as data folder aside of the `stack-fpm.yml` file. 
+Deployment will create `html` and `mysql` as data folder, customizable via environment variables defined in [env.template](env.template). 
 
 You need to backup these two folders regularly to prevent unnessesary data lost. It is adviced to make the deployment on a data disk than a system disk. It should be quite simple to setup a data backup job in your cloud service provider. 
 
