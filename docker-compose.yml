@@ -22,7 +22,7 @@ services:
       - wordpress
     restart: always
     ports:
-      - 8088:80
+      - ${APACHE_PORT}:80
     # Mount to the same host folder so that static requests will be handled by apache itself. 
     volumes:
       - ${WORDPRESS_LOCAL_DIR}:/var/www/html
@@ -34,7 +34,7 @@ services:
     container_name: blog-db
     restart: always
     ports:
-      - 3306:3306
+      - ${MYSQL_PORT}:3306
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
