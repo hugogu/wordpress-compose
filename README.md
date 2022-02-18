@@ -24,7 +24,7 @@ Havig *docker-compose* installed by following an on-line instruction like [this]
 Customize your options in the [env.template](env.template) file.
 
 ```bash
-source env.template
+set -a; source env.template; set +a
 cd /mnt              # Or on any data disk. 
 git clone git@github.com:hugogu/wordpress-compose.git blog
 cd blog
