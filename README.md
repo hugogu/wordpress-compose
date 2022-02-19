@@ -21,7 +21,14 @@ Hopefully you can gain reasonable good performance even on a host with a lower s
 
 ## How to Deploy
 
-Havig *docker-compose* installed by following an on-line instruction like [this](https://docs.docker.com/compose/install/). 
+### Prequisitions
+
+Install *Docker* by following [offical instruction](https://docs.docker.com/engine/install/).
+:warning: Please note it doesn't work with [Podman](https://podman.io/) due to a network issue. (Bug to fix)
+
+And install *docker-compose* by following an on-line instruction like [this](https://docs.docker.com/compose/install/). 
+
+### Deployment Steps
 
 Customize your options in the [env.template](env.template) file.
 

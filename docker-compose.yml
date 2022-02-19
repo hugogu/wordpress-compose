@@ -1,8 +1,9 @@
-version: '3.2'
+version: '3.7'
 
 services:
 
   wordpress:
+    hostname: wordpress
     image: wordpress:5.9.0-fpm-alpine
     container_name: blog-wordpress
     restart: always
@@ -16,6 +17,7 @@ services:
       - ${WORDPRESS_LOCAL_DIR}:/var/www/html
 
   apache:
+    hostname: apache
     build: './apache/'
     container_name: blog-apache
     depends_on:
@@ -28,6 +30,7 @@ services:
       - ${WORDPRESS_LOCAL_DIR}:/var/www/html
 
   db:
+    hostname: db
     image: mysql:8.0
     container_name: blog-db
     restart: always

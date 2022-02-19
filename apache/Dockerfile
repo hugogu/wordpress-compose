@@ -9,6 +9,9 @@ FROM ubuntu/apache2:2.4-21.10_beta
 
 WORKDIR /etc/apache2
 
+RUN apt update
+RUN apt install iputils-ping dnsutils
+
 COPY wp-fpm.conf /etc/apache2/sites-available/wp-fpm.conf
 
 RUN a2enmod rewrite proxy proxy_fcgi
