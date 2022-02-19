@@ -25,6 +25,8 @@ services:
     restart: always
     ports:
       - ${APACHE_PORT}:80
+    environment:
+      SERVER_HOST_NAME: ${SERVER_HOST_NAME}
     # Mount to the same host folder so that static requests will be handled by apache itself. 
     volumes:
       - ${WORDPRESS_LOCAL_DIR}:/var/www/html

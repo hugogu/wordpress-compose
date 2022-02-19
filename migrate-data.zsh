@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 echo "Creating tmp folder"
 mkdir -p tmp
 
