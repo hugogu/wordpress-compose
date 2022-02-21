@@ -12,6 +12,8 @@ services:
       WORDPRESS_DB_USER: ${WP_MYSQL_USER}
       WORDPRESS_DB_PASSWORD: ${WP_MYSQL_PASSWORD}
       WORDPRESS_DB_NAME: ${WP_MYSQL_DATABASE}
+    networks:
+      - common_backend
     # Mount to a host folder in order to leverage existing data backup mechanism of the underlying data disk.
     volumes:
       - ${WP_WEB_LOCAL_DIR}:${WP_WEB_INST_DIR}
@@ -29,6 +31,11 @@ services:
     environment:
       WORDPRESS_HOST_NAME: ${WP_HOST_NAME}
       WORDPRESS_INST_DIR: ${WP_WEB_INST_DIR}
+      WIKI_HOST_NAME: ${WIKI_HOST_NAME}
+      WIKI_PROXY_TARGET: ${WIKI_PROXY_TARGET}
+    networks:
+      - common_backend
+      - frontend
     # Mount to the same host folder so that static requests will be handled by apache itself. 
     volumes:
       - ${WP_WEB_LOCAL_DIR}:${WP_WEB_INST_DIR}
@@ -45,5 +52,14 @@ services:
       MYSQL_USER: ${WP_MYSQL_USER}
       MYSQL_PASSWORD: ${WP_MYSQL_PASSWORD}
       MYSQL_ROOT_PASSWORD: ${WP_MYSQL_ROOT_PASSWORD}
+    networks:
+      - common_backend
     volumes:
       - ${WP_DB_LOCAL_DIR}:/var/lib/mysql
+
+networks:
+  common_backend:
+    # This network is intended to be shared among all compose.
+    # Set a explicit name to get rid of the automatic prefix.
+    name: common_backend
+  frontend:

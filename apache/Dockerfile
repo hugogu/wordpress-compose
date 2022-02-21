@@ -7,6 +7,9 @@
 
 FROM ubuntu/apache2:2.4-21.10_beta
 
+RUN apt update
+RUN apt install -y iputils-ping dnsutils vim
+
 WORKDIR /etc/apache2
 
 COPY *.conf /etc/apache2/sites-available/
