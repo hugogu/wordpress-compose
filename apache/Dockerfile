@@ -14,5 +14,5 @@ WORKDIR /etc/apache2
 
 COPY *.conf /etc/apache2/sites-available/
 
-RUN a2enmod rewrite proxy proxy_fcgi proxy_http
+RUN a2enmod ssl headers http2 rewrite proxy proxy_fcgi proxy_http proxy_http2 remoteip
 RUN a2ensite wp-fpm
