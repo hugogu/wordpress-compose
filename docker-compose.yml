@@ -15,8 +15,9 @@ services:
     networks:
       - common_backend
     # Mount to a host folder in order to leverage existing data backup mechanism of the underlying data disk.
+    # The destination path is to in line with wordpress image.
     volumes:
-      - ${WP_WEB_LOCAL_DIR}:${WP_WEB_INST_DIR}
+      - ${WP_WEB_LOCAL_DIR}:/var/www/html
 
   # This apache server run as a reverse proxy that forward requests onto backend services, including the wordpress. 
   apache:
