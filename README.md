@@ -17,6 +17,10 @@ This is usually suitable to setup personal site.
 * Static resources are handled by Apache without hitting PHP engine
 * Permalinks support by default. (The official Apache httpd image don't as of 2.4)
 
+The overall strucure of this deployment looks like this:
+
+![Strcuture](img/structure.svg)
+
 Hopefully you can gain reasonable good performance even on a host with a lower spec on mordan cloud service provides. 
 
 ## How to Deploy
