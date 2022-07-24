@@ -45,6 +45,24 @@ If you just wanna use the env.template directly. Try:
 docker-compose --env-file env.template up --build
 ```
 
+### Enable HTTPS
+
+Having certification files mount specificed in following location.
+- /etc/ssl/certs/ssl-cert-snakeoil.pem: The certification file.
+- /etc/ssl/private/ssl-cert-snakeoil.key: The key file.
+- /etc/apache2/ssl.crt/server-ca.crt: Chain file.
+
+This can usually be done by mounting like this:
+```yml
+    volumes:
+      - ${WP_WEB_LOCAL_DIR}:${WP_WEB_INST_DIR}
+      - ./apache/cert/xxxxx_public.crt:/etc/ssl/certs/ssl-cert-snakeoil.pem
+      - ./apache/cert/xxxxx.key:/etc/ssl/private/ssl-cert-snakeoil.key
+      - ./apache/cert/xxxxx_chain.crt:/etc/apache2/ssl.crt/server-ca.crt
+```
+
+Please read `/etc/apache2/sites-available/default-ssl.conf` in the ubuntu apache 2 distribution to know about these files.
+
 ## How to Backup
 
 Deployment will create `html` and `mysql` as data folder, customizable via environment variables defined in [env.template](env.template). 
