@@ -40,7 +40,6 @@ services:
       - frontend
     # Mount to the same host folder so that static requests will be handled by apache itself. 
     volumes:
-      - ./apache/static/index.html:/var/www/html/index.html
       - ${WP_WEB_LOCAL_DIR}:${WP_WEB_INST_DIR}
 
   db:
